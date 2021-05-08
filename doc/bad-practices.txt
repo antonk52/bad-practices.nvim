@@ -1,0 +1,34 @@
+*bad-practices.txt*
+
+Author:  Anton Kastritskiy <https://github.com/antonk52>
+License: Same terms as Vim itself (see |license|)
+
+This plugin is only available for 'neovim'.
+
+INTRODUCTION                                                    *bad-practices*
+
+A plugin to help give up bad practices in vim.
+
+OPTIONS                                                 *bad-practices-options*
+
+                                                  *g:bad_practices_most_splits*
+  |g:bad_practices_most_splits|                             number (default: 3)
+
+  Controls how many splits are considered a good practice.
+
+  To disable set to `-1`
+
+    `let g:bad_practices_most_splits=5`
+
+                                                    *g:bad_practices_most_tabs*
+  |g:bad_practices_most_tabs|                               number (default: 3)
+
+  Controls how many tabs are considered a good practice.
+
+  To disable set to `-1`
+
+    `let g:bad_practices_most_tabs=5`
+
+
+----------------------------------------------------------------------------
+vim:tw=78:ft=help:
