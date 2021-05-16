@@ -46,7 +46,7 @@ local function setup()
         vim.api.nvim_set_keymap(
             'n',
             key,
-            key..':lua require("bad_practices/hjkl").reset_all()<CR>',
+            ':lua require("bad_practices/hjkl").reset_all()<CR>:echo<CR>'..key,
             {unique = true, noremap = true}
         )
     end
@@ -55,7 +55,7 @@ local function setup()
         vim.api.nvim_set_keymap(
             'n',
             key,
-            ':lua require("bad_practices/hjkl").reset_all()<CR>'..key,
+            ':lua require("bad_practices/hjkl").reset_all()<CR>:echo<CR>'..key,
             {unique = true, noremap = true}
         )
     end
