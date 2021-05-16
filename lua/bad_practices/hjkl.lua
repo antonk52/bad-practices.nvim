@@ -1,4 +1,4 @@
-local utils = require('bad_practices.nvim/util')
+local utils = require('bad_practices/util')
 local COUNTERS = {
     h = 0,
     j = 0,
@@ -6,7 +6,7 @@ local COUNTERS = {
     l = 0,
 }
 local MAX_CHARS = 10
-local _DEBUG = true
+local _DEBUG = false
 local global_optiona_name = 'g:bad_practices_max_hjkl'
 
 if vim.fn.exists(global_optiona_name) == 1 then
@@ -34,7 +34,7 @@ local function setup()
         vim.api.nvim_set_keymap(
             mode,
             key,
-            key..':lua require("bad_practices.nvim/hjkl").inc("'..key..'")<CR>',
+            key..':lua require("bad_practices/hjkl").inc("'..key..'")<CR>',
             options
         )
     end
@@ -46,7 +46,7 @@ local function setup()
         vim.api.nvim_set_keymap(
             'n',
             key,
-            key..':lua require("bad_practices.nvim/hjkl").reset_all()<CR>',
+            key..':lua require("bad_practices/hjkl").reset_all()<CR>',
             {unique = true, noremap = true}
         )
     end
@@ -55,7 +55,7 @@ local function setup()
         vim.api.nvim_set_keymap(
             'n',
             key,
-            ':lua require("bad_practices.nvim/hjkl").reset_all()<CR>'..key,
+            ':lua require("bad_practices/hjkl").reset_all()<CR>'..key,
             {unique = true, noremap = true}
         )
     end

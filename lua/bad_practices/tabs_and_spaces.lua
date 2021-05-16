@@ -1,4 +1,4 @@
-local utils = require('bad_practices.nvim/util')
+local utils = require('bad_practices/util')
 local CONST = {
     most_splits = 3,
     most_tabs = 3,
@@ -41,7 +41,7 @@ local has_tabs_and_spaces_hold_event = false
 local function setup()
     if has_tabs_and_spaces_hold_event == false then
         has_tabs_and_spaces_hold_event = true
-        vim.api.nvim_command("autocmd! CursorHold * lua require('bad_practices.nvim/tabs_and_spaces').check_static()")
+        vim.api.nvim_command("autocmd! CursorHold * lua require('bad_practices/tabs_and_spaces').check_static()")
     end
 end
 

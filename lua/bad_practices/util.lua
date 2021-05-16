@@ -3,8 +3,8 @@ local function print_warn(msg)
 end
 
 local function setup()
-    require('bad_practices.nvim/tabs_and_spaces').setup()
-    require('bad_practices.nvim/hjkl').setup()
+    require('bad_practices/tabs_and_spaces').setup()
+    require('bad_practices/hjkl').setup()
 end
 
 
