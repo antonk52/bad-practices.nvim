@@ -8,7 +8,7 @@ fun! Setup()
         lua require('bad_practices/util').turn_on()
     else
         echohl WarningMsg
-        echom "vim-bad-practices won't work outside neovim 0.5 or higher"
+        echom "bad-practices.nvim won't work outside neovim 0.5 or higher"
         echohl None
     endif
 endfun
