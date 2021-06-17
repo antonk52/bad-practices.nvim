@@ -96,7 +96,7 @@ local function inc(key)
             local count = COUNTERS[v]
             if (count > MAX_CHARS) then
                 utils.print_warn(
-                    'You pressed '..v..' '..count..' times in a row, consider other movements. See :help movements'
+                    'You pressed '..v..' '..count..' times in a row, consider other movements. :help movement'
                 )
             end
             COUNTERS[v] = 0
