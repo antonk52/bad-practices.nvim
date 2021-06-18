@@ -2,8 +2,7 @@
 
 A plugin to help give up bad practices in neovim.
 
-<video autoplay src="https://user-images.githubusercontent.com/5817809/122409184-9c066280-cf8b-11eb-9b65-bd71d06a311e.mov" style="max-width: 100%">
-</video>
+![bad-practices 1](https://user-images.githubusercontent.com/18750590/122595373-fc79ca80-d085-11eb-82fa-df1e3774dedd.gif)
 
 ## Installation
 
