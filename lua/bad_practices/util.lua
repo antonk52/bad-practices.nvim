@@ -1,5 +1,5 @@
 local function print_warn(msg)
-    vim.api.nvim_command("echohl WarningMsg | echo '" .. msg .. "' | echohl None")
+    vim.cmd("echohl WarningMsg | echo '" .. msg .. "' | echohl None")
 end
 
 local function setup()
@@ -9,17 +9,17 @@ end
 
 
 local function turn_off()
-    vim.api.nvim_set_var('bad_practices_enabled', 0)
+    vim.g['bad_practices_enabled'] = 0
 end
 
 local function turn_on()
-    vim.api.nvim_set_var('bad_practices_enabled', 1)
+    vim.g['bad_practices_enabled'] = 1
     setup()
 end
 
 local function get_global_enabled_var()
-    if vim.fn.exists('g:bad_practices_enabled') == 1 then
-        local enabled = vim.api.nvim_eval('g:bad_practices_enabled')
+    local enabled = vim.g['bad_practices_enabled']
+    if enabled ~= nil then
         if enabled == 0 or enabled == false then
             return false
         end

@@ -7,15 +7,15 @@ local COUNTERS = {
 }
 local MAX_CHARS = 10
 local _DEBUG = false
-local global_optiona_name = 'g:bad_practices_max_hjkl'
+local global_optiona_name = 'bad_practices_max_hjkl'
 
-if vim.fn.exists(global_optiona_name) == 1 then
-    local g_chars = vim.fn.nvim_get_var(global_optiona_name)
+if vim.fn.exists('g:'..global_optiona_name) == 1 then
+    local g_chars = vim.g[global_optiona_name]
     if type(g_chars) == 'number' then
         MAX_CHARS = g_chars
     else
         if _DEBUG == true then
-            print('"'..global_optiona_name..'" is set to non number value "'..g_chars..'"')
+            print('"g:'..global_optiona_name..'" is set to non number value "'..g_chars..'"')
         end
     end
 end
