@@ -1,24 +1,11 @@
 local utils = require('bad_practices/util')
+local M = {}
 local COUNTERS = {
     h = 0,
     j = 0,
     k = 0,
     l = 0,
 }
-local MAX_CHARS = 10
-local _DEBUG = false
-local global_optiona_name = 'bad_practices_max_hjkl'
-
-if vim.fn.exists('g:'..global_optiona_name) == 1 then
-    local g_chars = vim.g[global_optiona_name]
-    if type(g_chars) == 'number' then
-        MAX_CHARS = g_chars
-    else
-        if _DEBUG == true then
-            print('"g:'..global_optiona_name..'" is set to non number value "'..g_chars..'"')
-        end
-    end
-end
 
 local KEYS_TO_MAP = {
     basic_move = {'h', 'j', 'k', 'l'},
@@ -26,7 +13,13 @@ local KEYS_TO_MAP = {
     advanced_move = {'/', '?', 'n', 'N', '{', '}'},
 }
 
-local function setup()
+function M.setup(opts)
+    opts = opts or {}
+    local max_hjkl = opts.max_hjkl
+    if not type(max_hjkl) == 'number' then
+        print('bad_practices: max_hjkl is not a number')
+        return nil
+    end
     local mode = 'n'
     local options = {silent = true, noremap = true}
     -- set spy mappings for hjkl
@@ -34,7 +27,7 @@ local function setup()
         vim.api.nvim_set_keymap(
             mode,
             key,
-            key..':lua require("bad_practices/hjkl").inc("'..key..'")<CR>',
+            key..':lua require("bad_practices/hjkl").inc("'..key..'", '..max_hjkl..')<CR>',
             options
         )
     end
@@ -59,23 +52,19 @@ local function setup()
             {unique = true, noremap = true}
         )
     end
-
-    -- todo autocmd to reset counters on InsertEnter
-    if _DEBUG == true then print('hjkl mappings are set') end
 end
 
-local function reset_all()
+function M.reset_all()
     COUNTERS = {
         h = 0,
         j = 0,
         k = 0,
         l = 0,
     }
-    if _DEBUG == true then print('reset_all()') end
 end
 
 local function unset()
-    reset_all()
+    M.reset_all()
     for _,keys in pairs(KEYS_TO_MAP) do
         for _,key in pairs(keys) do
             vim.api.nvim_del_keymap('n', key)
@@ -84,7 +73,7 @@ local function unset()
 end
 
 -- todo check for other items overload prior to increment
-local function inc(key)
+function M.inc(key, max_hjkl)
     if utils.get_global_enabled_var() == false then
         unset()
         return 1
@@ -94,7 +83,7 @@ local function inc(key)
             COUNTERS[v] = COUNTERS[v] + 1
         else
             local count = COUNTERS[v]
-            if (count > MAX_CHARS) then
+            if (count > max_hjkl) then
                 utils.print_warn(
                     'You pressed '..v..' '..count..' times in a row, consider other movements. :help movement'
                 )
@@ -104,8 +93,4 @@ local function inc(key)
     end
 end
 
-return {
-    setup = setup,
-    inc = inc,
-    reset_all = reset_all,
-}
+return M
