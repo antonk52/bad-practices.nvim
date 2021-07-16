@@ -63,21 +63,9 @@ function M.reset_all()
     }
 end
 
-local function unset()
-    M.reset_all()
-    for _,keys in pairs(KEYS_TO_MAP) do
-        for _,key in pairs(keys) do
-            vim.api.nvim_del_keymap('n', key)
-        end
-    end
-end
-
 -- todo check for other items overload prior to increment
 function M.inc(key, max_hjkl)
-    if utils.get_global_enabled_var() == false then
-        unset()
-        return 1
-    end
+    -- TODO: think about how to turn plugin off
     for _,v in pairs(KEYS_TO_MAP.basic_move) do
         if key == v then
             COUNTERS[v] = COUNTERS[v] + 1
