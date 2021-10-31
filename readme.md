@@ -4,6 +4,8 @@ A plugin to help give up bad practices in neovim.
 
 ![bad-practices 1](https://user-images.githubusercontent.com/18750590/122595373-fc79ca80-d085-11eb-82fa-df1e3774dedd.gif)
 
+Alternatively if you have [nvim-notify](https://github.com/rcarriga/nvim-notify) installed you can get pretty notifications about tapping into bad practices.
+
 ## Installation
 
 Using vim-plug
