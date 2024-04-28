@@ -40,7 +40,7 @@ function M.setup(opts)
             'n',
             key,
             ':lua require("bad_practices/hjkl").reset_all()<CR>:echo<CR>'..key,
-            {unique = true, noremap = true}
+            {unique = true, noremap = true, silent = true}
         )
     end
 
@@ -49,7 +49,7 @@ function M.setup(opts)
             'n',
             key,
             ':lua require("bad_practices/hjkl").reset_all()<CR>:echo<CR>'..key,
-            {unique = true, noremap = true}
+            {unique = true, noremap = true, silent = true}
         )
     end
 end
