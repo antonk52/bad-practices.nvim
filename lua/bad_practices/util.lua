@@ -5,6 +5,12 @@ local NOTIFICATION_OFFSET = 5000
 local function check_has_notify_plugin()
     return pcall(function() require('notify') end)
 end
+local function check_has_snacks_plugin()
+    if pcall(function() require("snacks") end) then
+        return Snacks.config.notifier.enabled
+    end
+    return false
+end
 
 local last_shown_dict = {}
 
@@ -27,15 +33,21 @@ end
 cleanup()
 
 local notify = {
-    pretty = function(msg)
-        require('notify')(msg, 'ERROR', {
-            title = 'BadPractices',
-            icon = '●',
-        })
-    end,
     default = function(msg)
         -- use echo instead of echom or echoerr to avoid saving message to :messages
         vim.cmd("echohl WarningMsg | echo '" .. msg .. "' | echohl None")
+    end,
+    pretty_notify = function(msg)
+        require("notify")(msg, "ERROR", {
+            title = "BadPractices",
+            icon = "●",
+        })
+    end,
+    pretty_snacks = function(msg)
+        Snacks.notifier.notify(msg, "error", {
+            title = "BadPractices",
+            style = "compact",
+        })
     end
 }
 
@@ -47,11 +59,13 @@ function M.print_warn(msg)
     if last_shown_dict[msg] == nil or last_shown_dict[msg] + NOTIFICATION_OFFSET < now then
         last_shown_dict[msg] = now
 
-        if check_has_notify_plugin() then
-            notify.pretty(msg)
-        else
-            notify.default(msg)
-        end
+    end
+    if check_has_notify_plugin() then
+    	notify.pretty_notify(msg)
+    elseif check_has_snacks_plugin() then
+    	notify.pretty_snacks(msg)
+    else
+    	notify.default(msg)
     end
 end
 
